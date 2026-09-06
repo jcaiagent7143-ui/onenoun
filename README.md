@@ -174,6 +174,14 @@ plainly does know; its own generated test was too strict. The gate is
 deliberately biased that way, because a false reject costs you nothing and a
 false accept costs you a skill.
 
+**And then it lost.** Ablating this very example
+([examples/discovery/ablate.md](examples/discovery/ablate.md)) gives 2 wins,
+3 losses. Both versions produce the same framework names, but on three of the
+five tasks the judge preferred the original for *staying disciplined about not
+inventing facts*. The names survived the cut; the surrounding instructions
+about how carefully to use them did not. A 55% reduction that reads beautifully
+in a diff is still a worse skill, and only the ablation says so. Run it.
+
 `--no-discover` turns discovery off and uses only the terms already known.
 `onenoun lexicon check` re-runs every activation test, including the learned
 ones. On the shipped 30, the first run passed 27; the three that failed
