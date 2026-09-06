@@ -1,0 +1,15 @@
+# Copy to .github/workflows/onenoun.yml in a repo that ships skills.
+name: onenoun
+on:
+  pull_request:
+    paths: ["**/SKILL.md", "**/CLAUDE.md", "**/AGENTS.md", "**/.cursorrules", "**/rules/*.md"]
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    permissions: { pull-requests: write, contents: read }
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: jcaiagent7143-ui/onenoun@main
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}

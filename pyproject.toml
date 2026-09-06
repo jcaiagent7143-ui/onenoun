@@ -1,0 +1,31 @@
+[project]
+name = "onenoun"
+version = "0.1.0"
+description = "One noun activates a whole method. Prune the prose in your agent skills that the model already knows, and prove it did not get worse."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+authors = [{ name = "Jack Chew" }]
+keywords = ["claude-code", "codex", "skills", "prompt-engineering", "agents", "SKILL.md"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Software Development :: Libraries",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/jcaiagent7143-ui/onenoun"
+
+[project.scripts]
+onenoun = "onenoun.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["onenoun"]
+
+[dependency-groups]
+dev = ["pytest>=8"]

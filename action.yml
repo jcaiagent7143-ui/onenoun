@@ -1,0 +1,39 @@
+name: onenoun audit
+description: Comment an onenoun audit table on pull requests that touch SKILL.md, CLAUDE.md, AGENTS.md or rules files. Beta — runs the Claude Code CLI with an ANTHROPIC_API_KEY secret.
+branding:
+  icon: scissors
+  color: gray-dark
+inputs:
+  anthropic_api_key:
+    description: API key for the Claude Code CLI (set as a repository secret)
+    required: true
+  model:
+    description: model passed to `claude -p`
+    default: sonnet
+  paths:
+    description: files or directories to audit (space separated); default is every changed skill file in the PR
+    default: ""
+runs:
+  using: composite
+  steps:
+    - uses: astral-sh/setup-uv@v6
+    - name: Install Claude Code CLI
+      shell: bash
+      run: npm install -g @anthropic-ai/claude-code
+    - name: Audit
+      shell: bash
+      env:
+        ANTHROPIC_API_KEY: ${{ inputs.anthropic_api_key }}
+      run: |
+        set -e
+        if [ -n "${{ inputs.paths }}" ]; then FILES="${{ inputs.paths }}"; else
+          FILES=$(git diff --name-only "origin/${{ github.base_ref }}"...HEAD | grep -E '(SKILL|CLAUDE|AGENTS)\.md$|\.cursorrules$|/rules/.*\.md$' || true)
+        fi
+        [ -z "$FILES" ] && { echo "no skill files changed"; exit 0; }
+        { echo '## onenoun audit'; echo; echo '```'; uvx onenoun audit --model "${{ inputs.model }}" -o .onenoun $FILES; echo '```'; } > audit.md
+        for r in .onenoun/*.report.md; do { echo; echo "<details><summary>$(basename "$r")</summary>"; echo; cat "$r"; echo; echo "</details>"; } >> audit.md; done
+    - name: Comment
+      if: github.event_name == 'pull_request'
+      uses: marocchino/sticky-pull-request-comment@v2
+      with:
+        path: audit.md
