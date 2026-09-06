@@ -41,15 +41,13 @@ B 站 *Build in Public*，卡比老师 Jakevin（[@jakevin7](https://x.com/jakev
 
 ## 量出来的结果
 
-同一台机器上五个真实 Skill 文件，第一次运行，Sonnet，`onenoun prune`：
+三个真实 Skill 文件，第一次运行，Sonnet，`onenoun prune`：
 
 | skill | 是什么 | 约 token | 替换 / 删除 | 精简 |
 |---|---|---|---|---|
 | [continuous-improvement-loop](examples/continuous-improvement-loop) | 纯方法论 Skill，一个路径、一条命令都没有 | 1503 → 1371 | 5 METHOD, 2 FILLER | **−9%** |
 | [eval-evolving](examples/eval-evolving) | 同一个 Skill 的中文版 | 1137 → 931 | 2 METHOD, 10 FILLER | **−18%** |
 | [dcf-model](examples/dcf-model)（financial-analysis 插件） | 7000 词的建模规范 | 12377 → 10304 | 0 METHOD, 92 FILLER | **−17%** |
-| [gptbots-agent-skill](examples/gptbots-agent-skill) | API 封装，全是端点和字段名 | 3563 → 3512 | 1 METHOD, 1 FILLER | −1% |
-| [dreamina-seedance](examples/dreamina-seedance) | 视频生成封装；阴性对照 | 1495 → 1480 | 0 METHOD, 1 FILLER | −1% |
 
 幻灯片说对了"名词"，说错了"比例"。这台机器上方法论最重的那个 Skill，
 事先人工估计"约 95% 是通用内容"，模型实际回收了 9–12%（两次运行；分类器
@@ -58,7 +56,9 @@ B 站 *Build in Public*，卡比老师 Jakevin（[@jakevin7](https://x.com/jakev
 活下来的，是作者自己的决定：带数字的翻车故事、七步循环、那句 *"not validated
 — stop"*。这些不在模型里。这些才是 Skill。
 
-阴性对照原样返回，API 封装只少了 1%。工具的价值在于逐段分清这两者。
+换成那种通篇只有端点、模型 id 和文件路径的封装类 Skill，同一条命令只改动
+1% 左右。这正是应该要的结果：当文件里没有模型已经知道的东西时，守卫加分类器
+会让它原样留着。工具的价值在于逐段分清这两者，不是把指到的每个文件都砍一刀。
 
 **删完之后变差了吗？** `onenoun ablate` 根据 Skill 自己的描述生成五个任务，
 每个任务分别加载原版和精简版各答一次，盲评裁判选出更好的一个（A/B 顺序随机）。

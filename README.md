@@ -46,15 +46,13 @@ The slide makes a claim that can be measured. So this repo measures it.
 
 ## What it measured
 
-Five real skill files on one machine, first run, Sonnet, `onenoun prune`:
+Three real skill files, first run, Sonnet, `onenoun prune`:
 
 | skill | what it is | approx tokens | units replaced / deleted | pruned |
 |---|---|---|---|---|
 | [continuous-improvement-loop](examples/continuous-improvement-loop) | a pure methodology skill, no paths or commands at all | 1503 → 1371 | 5 METHOD, 2 FILLER | **−9%** |
 | [eval-evolving](examples/eval-evolving) | the same skill written in Chinese | 1137 → 931 | 2 METHOD, 10 FILLER | **−18%** |
 | [dcf-model](examples/dcf-model) (financial-analysis plugin) | 7,000-word modelling spec | 12377 → 10304 | 0 METHOD, 92 FILLER | **−17%** |
-| [gptbots-agent-skill](examples/gptbots-agent-skill) | API wrapper, dense with endpoints and field names | 3563 → 3512 | 1 METHOD, 1 FILLER | −1% |
-| [dreamina-seedance](examples/dreamina-seedance) | video-generation wrapper; the negative control | 1495 → 1480 | 0 METHOD, 1 FILLER | −1% |
 
 The slide is right about the words and wrong about the proportion. On the most
 methodology-heavy skill on this machine, the one an inventory had guessed was
@@ -65,8 +63,11 @@ parameters on the train split, judge once on the test split"* became
 decisions: the war stories with numbers, the seven-step loop, the rule that
 says *"not validated — stop"*. Those are not in the model. They are the skill.
 
-The negative control came back untouched, and the API wrapper lost one
-percent. The tool's value is knowing the difference per paragraph.
+Run against wrapper skills that are nothing but endpoints, model ids and file
+paths, the same command changes about one percent. That is the result to want:
+the guards and the classifier together leave a file alone when there is
+nothing in it the model already knows. The tool's value is telling the
+difference per paragraph, not cutting every file it is pointed at.
 
 **Did the pruned skill get worse?** `onenoun ablate` writes five tasks from
 the skill's own description, answers each with the original and with the

@@ -4,12 +4,12 @@ from onenoun.segment import join, segment
 
 FACTS = [
     "Run `python3 scripts/validate.py` before shipping.",
-    "The base URL is https://api-sg.gptbots.ai/ for Singapore accounts.",
+    "The base URL is https://api-sg.example.com/ for Singapore accounts.",
     "Set BYTEPLUS_ARK_API_KEY in your shell before running anything at all.",
     "Pass --format json to get the structured output instead of the markdown one.",
     "A 17-image note takes about 119 s end to end on the hosted service.",
     "Write the result to ~/Desktop/out.mp4 and then open it in the player.",
-    "Use model dreamina-seedance-2-0-260128 unless the user asks for another one.",
+    "Use model video-gen-2-0-260128 unless the user asks for another one.",
     "Mention @jakevin7 in the credit line of every post that quotes the slide.",
     "Call fetch_page() first and then parse the response with parse_html().",
     "The endpoint returns HTTP 412 for every Bilibili URL we have tried so far.",
